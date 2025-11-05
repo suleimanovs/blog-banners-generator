@@ -104,10 +104,23 @@ export default function App() {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             background-color: transparent;
+            overflow: hidden;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         ${bannerElement.querySelector('style')?.textContent || ''}
     </style>
@@ -212,13 +225,12 @@ export default function App() {
         {/* Banner display */}
         <div id="banner-container" style={{ 
           borderRadius: '8px', 
-          overflow: 'hidden',
+          overflow: 'visible',
           width: '100%',
           maxWidth: '100%',
           display: 'flex',
           justifyContent: 'center',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-          backgroundColor: '#000000'
+          backgroundColor: 'transparent'
         }}>
           {selectedBanner === 'testing' ? <TestingBanner /> : <SerializationBanner />}
         </div>

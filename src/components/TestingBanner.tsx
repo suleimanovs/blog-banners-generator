@@ -144,14 +144,15 @@ export function TestingBanner() {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
         .banner {
-          width: 100%;
-          max-width: 1500px;  /* Было 1200px - увеличь */
-          height: 650px;      /* Было 600px - увеличь если нужно */
+          width: 1200px;
+          height: 630px;
           background: linear-gradient(135deg, #0f0a1e 0%, #1a0f2e 50%, #0a0615 100%);
           position: relative;
           overflow: hidden;
           font-family: 'Inter', sans-serif;
           box-sizing: border-box;
+          margin: 0;
+          padding: 0;
         }
 
         /* Grid background */
@@ -171,7 +172,7 @@ export function TestingBanner() {
           opacity: 0.6;
         }
 
-        /* Content layout */
+        /* Content layout with safe-area */
         .content {
           position: relative;
           z-index: 2;
@@ -179,8 +180,11 @@ export function TestingBanner() {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 70px 200px;
+          padding: 50px 60px;
           box-sizing: border-box;
+          /* Safe-area: минимум 40px от краев для предотвращения обрезания */
+          min-width: calc(100% - 120px);
+          min-height: calc(100% - 100px);
         }
 
         .header-section {

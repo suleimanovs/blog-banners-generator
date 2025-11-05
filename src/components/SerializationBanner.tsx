@@ -120,14 +120,15 @@ export function SerializationBanner() {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
         .banner {
-          width: 100%;
-          max-width: 1200px;
+          width: 1200px;
           height: 630px;
           background: #000000;
           position: relative;
           overflow: hidden;
           font-family: 'Inter', sans-serif;
           box-sizing: border-box;
+          margin: 0;
+          padding: 0;
         }
 
         /* Grid background */
@@ -142,7 +143,7 @@ export function SerializationBanner() {
           opacity: 0.5;
         }
 
-        /* Content layout */
+        /* Content layout with safe-area */
         .content {
           position: relative;
           z-index: 2;
@@ -150,9 +151,12 @@ export function SerializationBanner() {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 80px;
+          padding: 50px;
           gap: 60px;
           box-sizing: border-box;
+          /* Safe-area: минимум 40px от краев для предотвращения обрезания */
+          min-width: calc(100% - 80px);
+          min-height: calc(100% - 80px);
         }
 
         .left-section {
