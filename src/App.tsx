@@ -1,14 +1,17 @@
 import { SerializationBanner } from './components/SerializationBanner';
+import { TestingBanner } from './components/TestingBanner';
 import { Download, FileImage } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { toSvg } from 'html-to-image';
 import { useState } from 'react';
 
 type ExportFormat = 'png' | 'svg' | 'html';
+type BannerType = 'testing' | 'serialization';
 
 export default function App() {
   const [isExporting, setIsExporting] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('png');
+  const [selectedBanner, setSelectedBanner] = useState<BannerType>('testing');
 
   const handleExport = async () => {
     setIsExporting(true);
@@ -66,7 +69,7 @@ export default function App() {
           });
           
           const link = document.createElement('a');
-          link.download = 'serialization-banner.png';
+          link.download = `${selectedBanner}-banner.png`;
           link.href = canvas.toDataURL('image/png');
           link.click();
         } else if (selectedFormat === 'svg') {
@@ -84,7 +87,7 @@ export default function App() {
   }
 });
           const link = document.createElement('a');
-          link.download = 'serialization-banner.svg';
+          link.download = `${selectedBanner}-banner.svg`;
           link.href = dataUrl;
           link.click();
         } else if (selectedFormat === 'html') {
@@ -96,7 +99,7 @@ export default function App() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serialization Banner</title>
+    <title>${selectedBanner === 'testing' ? 'Testing' : 'Serialization'} Banner</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -117,7 +120,7 @@ export default function App() {
             const blob = new Blob([htmlContent], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
-            link.download = 'serialization-banner.html';
+            link.download = `${selectedBanner}-banner.html`;
             link.href = url;
             link.click();
             URL.revokeObjectURL(url);
@@ -163,6 +166,49 @@ export default function App() {
         alignItems: 'center', 
         gap: '24px'
       }}>
+        {/* Banner selector */}
+        <div style={{ 
+          display: 'flex', 
+          gap: '12px', 
+          backgroundColor: '#1f2937', 
+          borderRadius: '8px', 
+          padding: '4px',
+          margin: '0 20px'
+        }}>
+          <button
+            onClick={() => setSelectedBanner('testing')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              backgroundColor: selectedBanner === 'testing' ? '#2563eb' : 'transparent',
+              color: selectedBanner === 'testing' ? '#ffffff' : '#9ca3af',
+              fontSize: '14px',
+              fontWeight: 500,
+            }}
+          >
+            Testing Banner
+          </button>
+          <button
+            onClick={() => setSelectedBanner('serialization')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              backgroundColor: selectedBanner === 'serialization' ? '#2563eb' : 'transparent',
+              color: selectedBanner === 'serialization' ? '#ffffff' : '#9ca3af',
+              fontSize: '14px',
+              fontWeight: 500,
+            }}
+          >
+            Serialization Banner
+          </button>
+        </div>
+
         {/* Banner display */}
         <div id="banner-container" style={{ 
           borderRadius: '8px', 
@@ -174,7 +220,7 @@ export default function App() {
           boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
           backgroundColor: '#000000'
         }}>
-          <SerializationBanner />
+          {selectedBanner === 'testing' ? <TestingBanner /> : <SerializationBanner />}
         </div>
 
         {/* Format selector */}
