@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function SerializationBanner() {
+export function TestingBanner() {
   return (
     <div className="banner">
       {/* Grid background */}
