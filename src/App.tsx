@@ -2,6 +2,7 @@ import { SerializationBanner } from './components/SerializationBanner';
 import { TestingBanner } from './components/TestingBanner';
 import { ViewModelBanner } from './components/ViewModelBanner';
 import { FragmentViewModelBanner } from './components/FragmentViewModelBanner';
+import { ComposeViewModelBanner } from './components/ComposeViewModelBanner';
 import { Download, FileImage } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { toSvg } from 'html-to-image';
@@ -9,12 +10,12 @@ import { useState } from 'react';
 import { locales, Language } from './locales';
 
 type ExportFormat = 'png' | 'svg' | 'html';
-type BannerType = 'testing' | 'serialization' | 'viewmodel' | 'fragmentViewModel';
+type BannerType = 'testing' | 'serialization' | 'viewmodel' | 'fragmentViewModel' | 'composeViewModel';
 
 export default function App() {
   const [isExporting, setIsExporting] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('png');
-  const [selectedBanner, setSelectedBanner] = useState<BannerType>('fragmentViewModel');
+  const [selectedBanner, setSelectedBanner] = useState<BannerType>('composeViewModel');
   const [language, setLanguage] = useState<Language>('ru');
 
   const handleExport = async () => {
@@ -103,7 +104,7 @@ export default function App() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${selectedBanner === 'testing' ? 'Testing' : selectedBanner === 'serialization' ? 'Serialization' : selectedBanner === 'viewmodel' ? 'ViewModel' : 'Fragment ViewModel'} Banner</title>
+    <title>${selectedBanner === 'testing' ? 'Testing' : selectedBanner === 'serialization' ? 'Serialization' : selectedBanner === 'viewmodel' ? 'ViewModel' : selectedBanner === 'fragmentViewModel' ? 'Fragment ViewModel' : 'Compose ViewModel'} Banner</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -299,6 +300,22 @@ export default function App() {
           >
             Fragment ViewModel Banner
           </button>
+          <button
+            onClick={() => setSelectedBanner('composeViewModel')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              backgroundColor: selectedBanner === 'composeViewModel' ? '#2563eb' : 'transparent',
+              color: selectedBanner === 'composeViewModel' ? '#ffffff' : '#9ca3af',
+              fontSize: '14px',
+              fontWeight: 500,
+            }}
+          >
+            Compose ViewModel Banner
+          </button>
         </div>
 
         {/* Banner display */}
@@ -317,8 +334,10 @@ export default function App() {
             <SerializationBanner strings={locales[language].serialization} />
           ) : selectedBanner === 'viewmodel' ? (
             <ViewModelBanner strings={locales[language].viewmodel} />
-          ) : (
+          ) : selectedBanner === 'fragmentViewModel' ? (
             <FragmentViewModelBanner strings={locales[language].fragmentViewModel} />
+          ) : (
+            <ComposeViewModelBanner strings={locales[language].composeViewModel} />
           )}
         </div>
 

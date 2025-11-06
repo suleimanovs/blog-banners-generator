@@ -53,6 +53,19 @@ export interface LocaleStrings {
     retainFragments: string;
     quote: string;
   };
+  composeViewModel: {
+    title: string;
+    subtitle: string;
+    compose: string;
+    view: string;
+    viewModel: string;
+    viewModelStoreOwner: string;
+    localViewModelStoreOwner: string;
+    viewHierarchy: string;
+    hiltViewModel: string;
+    koinViewModel: string;
+    quote: string;
+  };
 }
 
 export const locales: Record<Language, LocaleStrings> = {
@@ -109,6 +122,19 @@ export const locales: Record<Language, LocaleStrings> = {
       retainFragments: 'Retain Fragments',
       quote: 'Архитектурные связи для сохранения состояния',
     },
+    composeViewModel: {
+      title: 'ViewModel под капотом: Compose и View',
+      subtitle: 'Как работает viewModel() в Compose и View',
+      compose: 'Compose',
+      view: 'View',
+      viewModel: 'viewModel()',
+      viewModelStoreOwner: 'ViewModelStoreOwner',
+      localViewModelStoreOwner: 'LocalViewModelStoreOwner',
+      viewHierarchy: 'View Hierarchy',
+      hiltViewModel: 'hiltViewModel()',
+      koinViewModel: 'koinViewModel()',
+      quote: 'Глубокий взгляд на механизм scoping и state',
+    },
   },
   en: {
     testing: {
@@ -162,6 +188,19 @@ export const locales: Record<Language, LocaleStrings> = {
       childFragments: 'Child Fragments',
       retainFragments: 'Retain Fragments',
       quote: 'Architectural connections for state preservation',
+    },
+    composeViewModel: {
+      title: 'ViewModel Under the Hood: Compose and View',
+      subtitle: 'How viewModel() works in Compose and View',
+      compose: 'Compose',
+      view: 'View',
+      viewModel: 'viewModel()',
+      viewModelStoreOwner: 'ViewModelStoreOwner',
+      localViewModelStoreOwner: 'LocalViewModelStoreOwner',
+      viewHierarchy: 'View Hierarchy',
+      hiltViewModel: 'hiltViewModel()',
+      koinViewModel: 'koinViewModel()',
+      quote: 'A deep technical look at scoping and state mechanism',
     },
   },
 };
