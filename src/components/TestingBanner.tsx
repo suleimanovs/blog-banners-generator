@@ -1,6 +1,11 @@
 import React from 'react';
+import { LocaleStrings } from '../locales';
 
-export function TestingBanner() {
+interface TestingBannerProps {
+  strings: LocaleStrings['testing'];
+}
+
+export function TestingBanner({ strings }: TestingBannerProps) {
   return (
     <div className="banner">
       {/* Grid background */}
@@ -10,8 +15,8 @@ export function TestingBanner() {
       <div className="content">
         <div className="header-section">
           <div className="title-group">
-            <h1 className="main-title">Kotlin Testing Philosophy</h1>
-            <div className="subtitle">Kotlin · Kotest · JUnit · Test Doubles</div>
+            <h1 className="main-title">{strings.title}</h1>
+            <div className="subtitle">{strings.subtitle}</div>
           </div>
         </div>
         
@@ -25,8 +30,8 @@ export function TestingBanner() {
                   <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
                 </svg>
               </div>
-              <div className="box-label">expect</div>
-              <div className="box-desc">hypothesis</div>
+              <div className="box-label">{strings.expect}</div>
+              <div className="box-desc">{strings.hypothesis}</div>
             </div>
             
             <div className="duality-arrow">
@@ -65,14 +70,14 @@ export function TestingBanner() {
                   <path d="M12 6v6l4 2"/>
                 </svg>
               </div>
-              <div className="box-label">actual</div>
-              <div className="box-desc">reality</div>
+              <div className="box-label">{strings.actual}</div>
+              <div className="box-desc">{strings.reality}</div>
             </div>
           </div>
           
           {/* Test Doubles */}
           <div className="doubles-container">
-            <div className="doubles-title">Test Doubles</div>
+            <div className="doubles-title">{strings.testDoubles}</div>
             <div className="doubles-grid">
               <div className="double-item">
                 <div className="double-icon mock">
@@ -81,7 +86,7 @@ export function TestingBanner() {
                     <path d="M9 9h6M9 15h6"/>
                   </svg>
                 </div>
-                <span>Mock</span>
+                <span>{strings.mock}</span>
               </div>
               
               <div className="double-item">
@@ -91,7 +96,7 @@ export function TestingBanner() {
                     <path d="M12 7v5"/>
                   </svg>
                 </div>
-                <span>Stub</span>
+                <span>{strings.stub}</span>
               </div>
               
               <div className="double-item">
@@ -102,7 +107,7 @@ export function TestingBanner() {
                     <path d="M2 12l10 5 10-5"/>
                   </svg>
                 </div>
-                <span>Fake</span>
+                <span>{strings.fake}</span>
               </div>
               
               <div className="double-item">
@@ -112,7 +117,7 @@ export function TestingBanner() {
                     <circle cx="12" cy="12" r="3"/>
                   </svg>
                 </div>
-                <span>Spy</span>
+                <span>{strings.spy}</span>
               </div>
             </div>
           </div>
@@ -121,7 +126,7 @@ export function TestingBanner() {
         {/* Quote */}
         <div className="quote-section">
           <div className="quote-mark">"</div>
-          <div className="quote-text">Controlled simulations of reality</div>
+          <div className="quote-text">{strings.quote}</div>
         </div>
       </div>
       

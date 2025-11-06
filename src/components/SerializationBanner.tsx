@@ -1,6 +1,11 @@
 import React from 'react';
+import { LocaleStrings } from '../locales';
 
-export function SerializationBanner() {
+interface SerializationBannerProps {
+  strings: LocaleStrings['serialization'];
+}
+
+export function SerializationBanner({ strings }: SerializationBannerProps) {
   return (
     <div className="banner">
       {/* Grid background */}
@@ -10,15 +15,15 @@ export function SerializationBanner() {
       <div className="content">
         <div className="left-section">
           <div className="title-group">
-            <h1 className="main-title">Serialization</h1>
-            <div className="subtitle">in JVM • Android • Kotlin Multiplatform</div>
+            <h1 className="main-title">{strings.title}</h1>
+            <div className="subtitle">{strings.subtitle}</div>
           </div>
           
           <div className="tech-tags">
-            <span className="tag">Serializable</span>
-            <span className="tag">Externalizable</span>
-            <span className="tag">Parcelable</span>
-            <span className="tag">kotlinx.serialization</span>
+            <span className="tag">{strings.serializable}</span>
+            <span className="tag">{strings.externalizable}</span>
+            <span className="tag">{strings.parcelable}</span>
+            <span className="tag">{strings.kotlinxSerialization}</span>
           </div>
         </div>
         
@@ -31,7 +36,7 @@ export function SerializationBanner() {
                 <span></span>
                 <span></span>
               </div>
-              <span className="label">Object</span>
+              <span className="label">{strings.object}</span>
             </div>
             <div className="box-content">
               <div className="code-line">
@@ -84,7 +89,7 @@ export function SerializationBanner() {
                 <span></span>
                 <span></span>
               </div>
-              <span className="label">Bytes</span>
+              <span className="label">{strings.bytes}</span>
             </div>
             <div className="box-content bytes">
               <div className="byte-line">

@@ -1,6 +1,11 @@
 import React from 'react';
+import { LocaleStrings } from '../locales';
 
-export function ViewModelBanner() {
+interface ViewModelBannerProps {
+  strings: LocaleStrings['viewmodel'];
+}
+
+export function ViewModelBanner({ strings }: ViewModelBannerProps) {
   return (
     <div className="banner">
       {/* Grid background */}
@@ -10,8 +15,8 @@ export function ViewModelBanner() {
       <div className="content">
         <div className="header-section">
           <div className="title-group">
-            <h1 className="main-title">ViewModel в Activity под капотом</h1>
-            <div className="subtitle">Как она выживает при пересоздании</div>
+            <h1 className="main-title">{strings.title}</h1>
+            <div className="subtitle">{strings.subtitle}</div>
           </div>
         </div>
         
@@ -26,8 +31,8 @@ export function ViewModelBanner() {
                   <circle cx="12" cy="12" r="9"/>
                 </svg>
               </div>
-              <div className="state-label">Activity</div>
-              <div className="state-desc">destroy()</div>
+              <div className="state-label">{strings.activity}</div>
+              <div className="state-desc">{strings.destroy}</div>
             </div>
             
             {/* Arrow 1 */}
@@ -58,8 +63,8 @@ export function ViewModelBanner() {
                   <path d="M9 9h6M9 15h6"/>
                 </svg>
               </div>
-              <div className="state-label">ViewModelStore</div>
-              <div className="state-desc">сохранение</div>
+              <div className="state-label">{strings.store}</div>
+              <div className="state-desc">{strings.saving}</div>
             </div>
             
             {/* Arrow 2 */}
@@ -90,8 +95,8 @@ export function ViewModelBanner() {
                   <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
                 </svg>
               </div>
-              <div className="state-label">Activity</div>
-              <div className="state-desc">onCreate()</div>
+              <div className="state-label">{strings.activity}</div>
+              <div className="state-desc">{strings.onCreate}</div>
             </div>
           </div>
           
@@ -104,7 +109,7 @@ export function ViewModelBanner() {
                   <path d="M9 9h6M9 15h6"/>
                 </svg>
               </div>
-              <span>ViewModelStore</span>
+              <span>{strings.viewmodelStore}</span>
             </div>
             <div className="component-item">
               <div className="component-icon">
@@ -113,7 +118,7 @@ export function ViewModelBanner() {
                   <path d="M12 6v6l4 2"/>
                 </svg>
               </div>
-              <span>NonConfigurationInstances</span>
+              <span>{strings.nonConfigurationInstances}</span>
             </div>
             <div className="component-item">
               <div className="component-icon">
@@ -123,7 +128,7 @@ export function ViewModelBanner() {
                   <path d="M2 12l10 5 10-5"/>
                 </svg>
               </div>
-              <span>ActivityThread</span>
+              <span>{strings.activityThread}</span>
             </div>
             <div className="component-item">
               <div className="component-icon">
@@ -133,7 +138,7 @@ export function ViewModelBanner() {
                   <line x1="15" y1="9" x2="9" y2="15"/>
                 </svg>
               </div>
-              <span>ActivityClientRecord</span>
+              <span>{strings.activityClientRecord}</span>
             </div>
           </div>
         </div>
@@ -141,7 +146,7 @@ export function ViewModelBanner() {
         {/* Quote */}
         <div className="quote-section">
           <div className="quote-mark">"</div>
-          <div className="quote-text">Магия выживания через ViewModelStore</div>
+          <div className="quote-text">{strings.quote}</div>
         </div>
       </div>
       

@@ -5,6 +5,7 @@ import { Download, FileImage } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { toSvg } from 'html-to-image';
 import { useState } from 'react';
+import { locales, Language } from './locales';
 
 type ExportFormat = 'png' | 'svg' | 'html';
 type BannerType = 'testing' | 'serialization' | 'viewmodel';
@@ -13,6 +14,7 @@ export default function App() {
   const [isExporting, setIsExporting] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('png');
   const [selectedBanner, setSelectedBanner] = useState<BannerType>('viewmodel');
+  const [language, setLanguage] = useState<Language>('ru');
 
   const handleExport = async () => {
     setIsExporting(true);
@@ -70,7 +72,7 @@ export default function App() {
           });
           
           const link = document.createElement('a');
-          link.download = `${selectedBanner}-banner.png`;
+          link.download = `${selectedBanner}-banner-${language}.png`;
           link.href = canvas.toDataURL('image/png');
           link.click();
         } else if (selectedFormat === 'svg') {
@@ -88,7 +90,7 @@ export default function App() {
   }
 });
           const link = document.createElement('a');
-          link.download = `${selectedBanner}-banner.svg`;
+          link.download = `${selectedBanner}-banner-${language}.svg`;
           link.href = dataUrl;
           link.click();
         } else if (selectedFormat === 'html') {
@@ -134,7 +136,7 @@ export default function App() {
             const blob = new Blob([htmlContent], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
-            link.download = `${selectedBanner}-banner.html`;
+            link.download = `${selectedBanner}-banner-${language}.html`;
             link.href = url;
             link.click();
             URL.revokeObjectURL(url);
@@ -180,6 +182,49 @@ export default function App() {
         alignItems: 'center', 
         gap: '24px'
       }}>
+        {/* Language selector */}
+        <div style={{ 
+          display: 'flex', 
+          gap: '12px', 
+          backgroundColor: '#1f2937', 
+          borderRadius: '8px', 
+          padding: '4px',
+          margin: '0 20px'
+        }}>
+          <button
+            onClick={() => setLanguage('ru')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              backgroundColor: language === 'ru' ? '#2563eb' : 'transparent',
+              color: language === 'ru' ? '#ffffff' : '#9ca3af',
+              fontSize: '14px',
+              fontWeight: 500,
+            }}
+          >
+            🇷🇺 RU
+          </button>
+          <button
+            onClick={() => setLanguage('en')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              backgroundColor: language === 'en' ? '#2563eb' : 'transparent',
+              color: language === 'en' ? '#ffffff' : '#9ca3af',
+              fontSize: '14px',
+              fontWeight: 500,
+            }}
+          >
+            🇬🇧 EN
+          </button>
+        </div>
+
         {/* Banner selector */}
         <div style={{ 
           display: 'flex', 
@@ -249,7 +294,13 @@ export default function App() {
           justifyContent: 'center',
           backgroundColor: 'transparent'
         }}>
-          {selectedBanner === 'testing' ? <TestingBanner /> : selectedBanner === 'serialization' ? <SerializationBanner /> : <ViewModelBanner />}
+          {selectedBanner === 'testing' ? (
+            <TestingBanner strings={locales[language].testing} />
+          ) : selectedBanner === 'serialization' ? (
+            <SerializationBanner strings={locales[language].serialization} />
+          ) : (
+            <ViewModelBanner strings={locales[language].viewmodel} />
+          )}
         </div>
 
         {/* Format selector */}
