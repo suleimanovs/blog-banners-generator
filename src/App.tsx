@@ -1,6 +1,7 @@
 import { SerializationBanner } from './components/SerializationBanner';
 import { TestingBanner } from './components/TestingBanner';
 import { ViewModelBanner } from './components/ViewModelBanner';
+import { FragmentViewModelBanner } from './components/FragmentViewModelBanner';
 import { Download, FileImage } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { toSvg } from 'html-to-image';
@@ -8,12 +9,12 @@ import { useState } from 'react';
 import { locales, Language } from './locales';
 
 type ExportFormat = 'png' | 'svg' | 'html';
-type BannerType = 'testing' | 'serialization' | 'viewmodel';
+type BannerType = 'testing' | 'serialization' | 'viewmodel' | 'fragmentViewModel';
 
 export default function App() {
   const [isExporting, setIsExporting] = useState(false);
   const [selectedFormat, setSelectedFormat] = useState<ExportFormat>('png');
-  const [selectedBanner, setSelectedBanner] = useState<BannerType>('viewmodel');
+  const [selectedBanner, setSelectedBanner] = useState<BannerType>('fragmentViewModel');
   const [language, setLanguage] = useState<Language>('ru');
 
   const handleExport = async () => {
@@ -102,7 +103,7 @@ export default function App() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${selectedBanner === 'testing' ? 'Testing' : selectedBanner === 'serialization' ? 'Serialization' : 'ViewModel'} Banner</title>
+    <title>${selectedBanner === 'testing' ? 'Testing' : selectedBanner === 'serialization' ? 'Serialization' : selectedBanner === 'viewmodel' ? 'ViewModel' : 'Fragment ViewModel'} Banner</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -282,6 +283,22 @@ export default function App() {
           >
             ViewModel Banner
           </button>
+          <button
+            onClick={() => setSelectedBanner('fragmentViewModel')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s',
+              backgroundColor: selectedBanner === 'fragmentViewModel' ? '#2563eb' : 'transparent',
+              color: selectedBanner === 'fragmentViewModel' ? '#ffffff' : '#9ca3af',
+              fontSize: '14px',
+              fontWeight: 500,
+            }}
+          >
+            Fragment ViewModel Banner
+          </button>
         </div>
 
         {/* Banner display */}
@@ -298,8 +315,10 @@ export default function App() {
             <TestingBanner strings={locales[language].testing} />
           ) : selectedBanner === 'serialization' ? (
             <SerializationBanner strings={locales[language].serialization} />
-          ) : (
+          ) : selectedBanner === 'viewmodel' ? (
             <ViewModelBanner strings={locales[language].viewmodel} />
+          ) : (
+            <FragmentViewModelBanner strings={locales[language].fragmentViewModel} />
           )}
         </div>
 

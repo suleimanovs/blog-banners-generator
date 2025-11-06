@@ -39,6 +39,20 @@ export interface LocaleStrings {
     activityClientRecord: string;
     quote: string;
   };
+  fragmentViewModel: {
+    title: string;
+    subtitle: string;
+    fragment: string;
+    destroy: string;
+    store: string;
+    saving: string;
+    onCreate: string;
+    viewmodelStore: string;
+    fragmentManagerViewModel: string;
+    childFragments: string;
+    retainFragments: string;
+    quote: string;
+  };
 }
 
 export const locales: Record<Language, LocaleStrings> = {
@@ -81,6 +95,20 @@ export const locales: Record<Language, LocaleStrings> = {
       activityClientRecord: 'ActivityClientRecord',
       quote: 'Магия выживания через ViewModelStore',
     },
+    fragmentViewModel: {
+      title: 'ViewModel в Fragment под капотом',
+      subtitle: 'От ViewModelStore до Retain Fragments',
+      fragment: 'Fragment',
+      destroy: 'destroy()',
+      store: 'ViewModelStore',
+      saving: 'сохранение',
+      onCreate: 'onCreate()',
+      viewmodelStore: 'ViewModelStore',
+      fragmentManagerViewModel: 'FragmentManagerViewModel',
+      childFragments: 'Child Fragments',
+      retainFragments: 'Retain Fragments',
+      quote: 'Архитектурные связи для сохранения состояния',
+    },
   },
   en: {
     testing: {
@@ -120,6 +148,20 @@ export const locales: Record<Language, LocaleStrings> = {
       activityThread: 'ActivityThread',
       activityClientRecord: 'ActivityClientRecord',
       quote: 'The magic of survival through ViewModelStore',
+    },
+    fragmentViewModel: {
+      title: 'ViewModel in Fragment Under the Hood',
+      subtitle: 'From ViewModelStore to Retain Fragments',
+      fragment: 'Fragment',
+      destroy: 'destroy()',
+      store: 'ViewModelStore',
+      saving: 'saving',
+      onCreate: 'onCreate()',
+      viewmodelStore: 'ViewModelStore',
+      fragmentManagerViewModel: 'FragmentManagerViewModel',
+      childFragments: 'Child Fragments',
+      retainFragments: 'Retain Fragments',
+      quote: 'Architectural connections for state preservation',
     },
   },
 };
