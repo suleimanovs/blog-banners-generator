@@ -1,5 +1,6 @@
 import React from 'react';
 import { LocaleStrings } from '../locales';
+import ComposeLogo from './logos/jetpackcompose-original.svg?url';
 
 interface ComposeViewModelBannerProps {
   strings: LocaleStrings['composeViewModel'];
@@ -21,43 +22,50 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
         </div>
         
         <div className="architecture-section">
-          {/* Compose and View connection */}
+          {/* Compose and View connection with logo */}
           <div className="platforms-container">
             <div className="platform-box compose">
-              <div className="platform-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/>
-                  <path d="M9 9h6M9 15h6"/>
-                  <circle cx="12" cy="12" r="1"/>
-                </svg>
+              <div className="compose-logo-wrapper">
+                <img src={ComposeLogo} alt="Jetpack Compose" className="compose-logo" />
               </div>
               <div className="platform-label">{strings.compose}</div>
               <div className="platform-code">{strings.viewModel}</div>
             </div>
             
             <div className="connection-arrow">
-              <svg width="80" height="40" viewBox="0 0 80 40">
+              <svg width="100" height="60" viewBox="0 0 100 60">
                 <defs>
                   <linearGradient id="composeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style={{ stopColor: '#8b5cf6', stopOpacity: 1 }} />
-                    <stop offset="50%" style={{ stopColor: '#3b82f6', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#10b981', stopOpacity: 1 }} />
+                    <stop offset="0%" style={{ stopColor: '#3ddb85', stopOpacity: 1 }} />
+                    <stop offset="50%" style={{ stopColor: '#4285f4', stopOpacity: 1 }} />
+                    <stop offset="100%" style={{ stopColor: '#3ddb85', stopOpacity: 1 }} />
                   </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
                 </defs>
                 <path 
-                  d="M10 20 L35 20 M35 20 L28 13 M35 20 L28 27 M45 20 L70 20 M45 20 L52 13 M45 20 L52 27" 
+                  d="M15 30 L40 30 M40 30 L33 23 M40 30 L33 37 M60 30 L85 30 M60 30 L67 23 M60 30 L67 37" 
                   stroke="url(#composeGradient)" 
-                  strokeWidth="2.5" 
+                  strokeWidth="3" 
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  filter="url(#glow)"
                 />
+                <circle cx="50" cy="30" r="4" fill="#4285f4" opacity="0.6">
+                  <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" />
+                </circle>
               </svg>
             </div>
             
             <div className="platform-box view">
-              <div className="platform-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="view-logo-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="view-logo">
                   <rect x="3" y="3" width="18" height="18" rx="2"/>
                   <path d="M9 9h6M9 15h6"/>
                 </svg>
@@ -136,13 +144,32 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
         .banner {
           width: 1200px;
           height: 630px;
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+          background: linear-gradient(135deg, #041619 0%, #083042 30%, #0a1a2e 60%, #041619 100%);
           position: relative;
           overflow: hidden;
           font-family: 'Inter', sans-serif;
           box-sizing: border-box;
           margin: 0;
           padding: 0;
+        }
+        
+        /* Animated background particles */
+        .banner::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(circle at 20% 30%, rgba(61, 219, 133, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(66, 133, 244, 0.1) 0%, transparent 50%);
+          animation: pulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 0.8; }
         }
 
         /* Grid background */
@@ -190,13 +217,20 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
         .main-title {
           font-size: 48px;
           font-weight: 700;
-          background: linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #60a5fa 100%);
+          background: linear-gradient(135deg, #3ddb85 0%, #ffffff 30%, #4285f4 70%, #3ddb85 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
+          background-size: 200% 200%;
+          animation: gradientShift 5s ease infinite;
           letter-spacing: -1.5px;
           margin: 0;
           line-height: 1.1;
+        }
+        
+        @keyframes gradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
 
         .subtitle {
@@ -237,37 +271,62 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
         }
 
         .platform-box.compose {
-          border-color: rgba(139, 92, 246, 0.5);
+          border-color: rgba(61, 219, 133, 0.5);
+          background: rgba(4, 22, 25, 0.7);
+          box-shadow: 0 0 20px rgba(61, 219, 133, 0.2);
+        }
+        
+        .compose-logo-wrapper {
+          width: 64px;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(61, 219, 133, 0.1);
+          border-radius: 12px;
+          padding: 8px;
+          margin-bottom: 4px;
+        }
+        
+        .compose-logo {
+          width: 100%;
+          height: 100%;
+          filter: drop-shadow(0 0 8px rgba(61, 219, 133, 0.4));
         }
 
         .platform-box.view {
-          border-color: rgba(16, 185, 129, 0.4);
+          border-color: rgba(16, 185, 129, 0.5);
+          background: rgba(4, 22, 25, 0.7);
+          box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+        
+        .view-logo-wrapper {
+          width: 64px;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(16, 185, 129, 0.1);
+          border-radius: 12px;
+          padding: 8px;
+          margin-bottom: 4px;
+        }
+        
+        .view-logo {
+          width: 100%;
+          height: 100%;
+          color: #10b981;
+          filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
         }
 
         .platform-box:hover {
           transform: translateY(-3px);
-          box-shadow: 0 6px 24px rgba(59, 130, 246, 0.3);
-        }
-
-        .platform-icon {
-          color: #60a5fa;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .platform-box.compose .platform-icon {
-          color: #a78bfa;
-        }
-
-        .platform-box.view .platform-icon {
-          color: #34d399;
         }
         
-        .platform-icon svg {
-          width: 36px;
-          height: 36px;
+        .platform-box.view:hover {
+          box-shadow: 0 6px 24px rgba(16, 185, 129, 0.3);
         }
+
 
         .platform-label {
           font-family: 'JetBrains Mono', monospace;
@@ -287,12 +346,12 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
           display: flex;
           align-items: center;
           justify-content: center;
-          filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.4));
+          filter: drop-shadow(0 0 12px rgba(66, 133, 244, 0.5));
         }
         
         .connection-arrow svg {
-          width: 80px;
-          height: 40px;
+          width: 100px;
+          height: 60px;
         }
 
         /* Components grid */
@@ -316,18 +375,24 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
         }
 
         .component-item.primary {
-          border-color: rgba(59, 130, 246, 0.4);
-          background: rgba(30, 41, 59, 0.5);
+          border-color: rgba(66, 133, 244, 0.4);
+          background: rgba(8, 48, 66, 0.4);
         }
 
         .component-item.di {
-          border-color: rgba(139, 92, 246, 0.3);
+          border-color: rgba(61, 219, 133, 0.3);
+          background: rgba(4, 22, 25, 0.3);
         }
 
         .component-item:hover {
-          border-color: rgba(59, 130, 246, 0.5);
+          border-color: rgba(66, 133, 244, 0.6);
           transform: translateY(-2px);
-          background: rgba(30, 41, 59, 0.6);
+          background: rgba(8, 48, 66, 0.6);
+        }
+        
+        .component-item.di:hover {
+          border-color: rgba(61, 219, 133, 0.5);
+          background: rgba(4, 22, 25, 0.5);
         }
 
         .component-item span {
@@ -344,19 +409,19 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(59, 130, 246, 0.1);
-          color: #60a5fa;
+          background: rgba(66, 133, 244, 0.15);
+          color: #4285f4;
           flex-shrink: 0;
         }
 
         .component-item.primary .component-icon {
-          background: rgba(59, 130, 246, 0.15);
-          color: #3b82f6;
+          background: rgba(66, 133, 244, 0.2);
+          color: #4285f4;
         }
 
         .component-item.di .component-icon {
-          background: rgba(139, 92, 246, 0.1);
-          color: #8b5cf6;
+          background: rgba(61, 219, 133, 0.15);
+          color: #3ddb85;
         }
 
         /* Quote section */
@@ -371,7 +436,7 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
         .quote-mark {
           font-size: 70px;
           font-weight: 700;
-          color: rgba(59, 130, 246, 0.2);
+          color: rgba(61, 219, 133, 0.2);
           line-height: 0.6;
           font-family: Georgia, serif;
         }
@@ -388,9 +453,9 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
           position: absolute;
           top: 0;
           right: 0;
-          width: 300px;
-          height: 300px;
-          background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle at top right, rgba(61, 219, 133, 0.15) 0%, transparent 70%);
           pointer-events: none;
         }
 
@@ -399,9 +464,25 @@ export function ComposeViewModelBanner({ strings }: ComposeViewModelBannerProps)
           position: absolute;
           top: 0;
           right: 0;
-          width: 180px;
-          height: 180px;
-          background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+          width: 250px;
+          height: 250px;
+          background: radial-gradient(circle at top right, rgba(66, 133, 244, 0.12) 0%, transparent 70%);
+        }
+        
+        .corner-accent::after {
+          content: '';
+          position: absolute;
+          top: 50px;
+          right: 50px;
+          width: 150px;
+          height: 150px;
+          background: radial-gradient(circle, rgba(61, 219, 133, 0.1) 0%, transparent 70%);
+          animation: cornerPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes cornerPulse {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.1); }
         }
       `}</style>
     </div>
