@@ -66,6 +66,19 @@ export interface LocaleStrings {
     koinViewModel: string;
     quote: string;
   };
+  savedStateHandle: {
+    title: string;
+    subtitle: string;
+    onSaveInstanceState: string;
+    bundle: string;
+    savedStateHandle: string;
+    savedStateRegistry: string;
+    activityThread: string;
+    instrumentation: string;
+    activityClientRecord: string;
+    lifecycle: string;
+    quote: string;
+  };
 }
 
 export const locales: Record<Language, LocaleStrings> = {
@@ -135,6 +148,19 @@ export const locales: Record<Language, LocaleStrings> = {
       koinViewModel: 'koinViewModel()',
       quote: 'Глубокий взгляд на механизм scoping и state',
     },
+    savedStateHandle: {
+      title: 'SavedStateHandle и Bundle под капотом',
+      subtitle: 'Как Android сохраняет состояние',
+      onSaveInstanceState: 'onSaveInstanceState()',
+      bundle: 'Bundle',
+      savedStateHandle: 'SavedStateHandle',
+      savedStateRegistry: 'SavedStateRegistry',
+      activityThread: 'ActivityThread',
+      instrumentation: 'Instrumentation',
+      activityClientRecord: 'ActivityClientRecord',
+      lifecycle: 'Lifecycle',
+      quote: 'Полный низкоуровневый маршрут данных',
+    },
   },
   en: {
     testing: {
@@ -201,6 +227,19 @@ export const locales: Record<Language, LocaleStrings> = {
       hiltViewModel: 'hiltViewModel()',
       koinViewModel: 'koinViewModel()',
       quote: 'A deep technical look at scoping and state mechanism',
+    },
+    savedStateHandle: {
+      title: 'SavedStateHandle and Bundle Under the Hood',
+      subtitle: 'How Android saves and restores state',
+      onSaveInstanceState: 'onSaveInstanceState()',
+      bundle: 'Bundle',
+      savedStateHandle: 'SavedStateHandle',
+      savedStateRegistry: 'SavedStateRegistry',
+      activityThread: 'ActivityThread',
+      instrumentation: 'Instrumentation',
+      activityClientRecord: 'ActivityClientRecord',
+      lifecycle: 'Lifecycle',
+      quote: 'The complete low-level data route',
     },
   },
 };
